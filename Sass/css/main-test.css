@@ -24,6 +24,7 @@ html {
 }
 
 body {
+	position: relative;
 	background: #eee;
 	width: 900px;
 	margin: 0 auto;
@@ -39,7 +40,12 @@ header {
 }
 
 footer {
-	background: #A3B3F7;
+	background: #A3B3F7; 
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    padding-right: 0;
 }
 
 section {

@@ -6,15 +6,9 @@
    right: auto;
   }
 }
-//Псевдо-элемент
-@mixin pseudo($display: block, $pos: absolute, $content: ''){
-  content: $content;
-  display: $display;
-  position: $pos;
-}
 
 //Отзывчивое соотношение(для масштабируемых элементов)
-@mixin responsive-ratio($x,$y, $pseudo: false) {
+@mixin responsive-ratio($x, $y, $pseudo: false) {
   $padding: unquote( ( $y / $x ) * 100 + '%' );
   @if $pseudo {
    &:before {
@@ -45,28 +39,7 @@
   &::-webkit-input-placeholder { @content; }
 }
 
-//Медиа-запросы
-$breakpoints: (
-  "phone":        400px,
-  "phone-wide":   480px,
-  "phablet":      560px,
-  "tablet-small": 640px,
-  "tablet":       768px,
-  "tablet-wide":  1024px,
-  "desktop":      1248px,
-  "desktop-wide": 1440px
-);
-@mixin mq($width, $type: min) {
-  @if map_has_key($breakpoints, $width) {
-   $width: map_get($breakpoints, $width);
-   @if $type == max {
-    $width: $width - 1px;
-   }
-   @media only screen and (#{$type}-width: $width) {
-    @content;
-   }
-  }
-}
+
 //ПРИМЕР:
 //.site-header {
 //  padding: 2rem;
@@ -115,24 +88,46 @@ $z-indexes: (
 }
 
 //===========================
-/*--------------------------------
-  Media Queries
-  used for outputting content either between media query tags
-  example: basic usage
-  .element {
-    width: 50%;
-    @include mq('tablet-small') {
-      width: 20%;
-    }
+///*--------------------------------
+//  Media Queries
+//  used for outputting content either between media query tags
+//  example: basic usage
+//  .element {
+//    width: 50%;
+//    @include mq('tablet-small') {
+//      width: 20%;
+//    }
+//  }
+//  example: using max-width
+//  .element {
+//    width: 50%;
+//    @include mq('tablet-small', 'max') {
+//      width: 20%;
+//    }
+//  }
+//*/
+//Медиа-запросы
+$breakpoints: (
+  "phone":        400px,
+  "phone-wide":   480px,
+  "phablet":      560px,
+  "tablet-small": 640px,
+  "tablet":       768px,
+  "tablet-wide":  1024px,
+  "desktop":      1248px,
+  "desktop-wide": 1440px
+);
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+   $width: map_get($breakpoints, $width);
+   @if $type == max {
+    $width: $width - 1px;
+   }
+   @media only screen and (#{$type}-width: $width) {
+    @content;
+   }
   }
-  example: using max-width
-  .element {
-    width: 50%;
-    @include mq('tablet-small', 'max') {
-      width: 20%;
-    }
-  }
-*/
+}
 
 @mixin mq($size, $type: min, $property: width) {
 
@@ -153,20 +148,19 @@ $z-indexes: (
 
 
 
-/*--------------------------------
-  Margin / Padding Quick Resets
-  example: top & bottom margin set to $spacing-unit
-  .element {
-    @include push--ends;
-  }
-  example: left & right padding set to $spacing-unit--small
-  .element {
-    @include soft--sides($spacing-unit--small);
-  }
-*/
+///*--------------------------------
+//  Margin / Padding Quick Resets
+//  example: top & bottom margin set to $spacing-unit
+//  .element {
+//    @include push--ends;
+//  }
+//  example: left & right padding set to $spacing-unit--small
+//  .element {
+//    @include soft--sides($spacing-unit--small);
+//  }
+//*/
 
 // add/remove margins
-
 @mixin push--ends($spacing: $spacing-unit) { margin: { top: $spacing; bottom: $spacing; } }
 @mixin push--sides($spacing: $spacing-unit) { margin: { left: $spacing; right: $spacing; } }
 
@@ -178,21 +172,13 @@ $z-indexes: (
 
 
 // add/remove paddings
-
 @mixin soft--ends($spacing: $spacing-unit) { padding: { top: $spacing; bottom: $spacing; } }
 @mixin soft--sides($spacing: $spacing-unit) { padding: { left: $spacing; right: $spacing; } }
 
 @mixin hard--ends { padding: { top: 0; bottom: 0; } }
 @mixin hard--sides { padding: { left: 0; right: 0; } }
 
-
-
-/*--------------------------------
-  Helper mixins
-*/
-
 // Contain floats / clearfix
-
 @mixin cf {
 
   &::after {
@@ -204,7 +190,6 @@ $z-indexes: (
 
 
 // Hide from both screenreaders and browsers
-
 @mixin hidden {
   display: none;
   visibility: hidden;
@@ -217,7 +202,6 @@ $z-indexes: (
 
 
 // Hide only visually, but have it available for screenreaders
-
 @mixin vh($focusable: false) {
   border: 0;
   clip: rect(0 0 0 0);
@@ -246,7 +230,6 @@ $z-indexes: (
 // Allow the element to be focusable when navigated to via the keyboard
 
 @mixin vh-focusable {
-
   &:active,
   &:focus {
     clip: auto;
@@ -258,25 +241,21 @@ $z-indexes: (
   }
 }
 
-
 // Hide visually and from screenreaders, but maintain layout
-
 @mixin invisible {
   visibility: hidden;
 }
 
-
-
-/*--------------------------------
-  Form input placeholder text
-  example:
-  input,
-  textarea {
-    @include input-placeholder {
-      color: $grey;
-    }
-  }
-*/
+///*--------------------------------
+//  Form input placeholder text
+//  example:
+//  input,
+//  textarea {
+//    @include input-placeholder {
+//      color: $grey;
+//    }
+//  }
+//*/
 
 @mixin input-placeholder {
   &.placeholder { @content; }
@@ -287,16 +266,15 @@ $z-indexes: (
 }
 
 
-
-/*--------------------------------
-  Retina images
-  example:
-  .element {
-    @include retina {
-      background-image: url(../img/background@2x.png);
-    }
-  }
-*/
+///*--------------------------------
+//  Retina images
+//  example:
+//  .element {
+//    @include retina {
+//      background-image: url(../img/background@2x.png);
+//    }
+//  }
+//*/
 
 @mixin retina {
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -309,33 +287,32 @@ $z-indexes: (
 }
 
 
-
-/*--------------------------------
-  Content margins
-  fore removing first/last child margins
-  example: default
-  .element {
-    @include content-margins;
-  }
-  output:
-  .element > *:first-child {
-    margin-top: 0;
-  }
-  .element > *:last-child {
-    margin-bottom: 0;
-  }
-  example: empty selector
-  .element {
-    @include content-margins('false');
-  }
-  output:
-  .element:first-child {
-    margin-top: 0;
-  }
-  .element:last-child {
-    margin-bottom: 0;
-  }
-*/
+///*--------------------------------
+//  Content margins
+//  fore removing first/last child margins
+//  example: default
+//  .element {
+//    @include content-margins;
+//  }
+//  output:
+//  .element > *:first-child {
+//    margin-top: 0;
+//  }
+//  .element > *:last-child {
+//    margin-bottom: 0;
+//  }
+//  example: empty selector
+//  .element {
+//    @include content-margins('false');
+//  }
+//  output:
+//  .element:first-child {
+//    margin-top: 0;
+//  }
+//  .element:last-child {
+//    margin-bottom: 0;
+//  }
+//*/
 
 
 @mixin content-margins($selector: '> *', $last-child: false) {

@@ -1,52 +1,59 @@
-$font_size: 1rem
-$color_bg: #29b0a0
+
+$font_name: ProximaNova
+$font_size: 18px
+$font-weight: 400
+
+$color_bg: #eee
 $color_text: #fff
 $color_input_text: #333
 $color_input_bg: #999
 $color_placeholder: #777
+
+$color_btn_bg: transparent
+$color_btn_txt: #777
+
 $text_shadow: 0
 $box_shadow: 0
 
 $color_link: #fff
-$color_link-nav: #78828c
-$color_hover: #414041
 $color_visit: #C62EB2
+$color_hover: #414041
 $color_active: #c62f21
 $color_link_bg: #5A768A
 
-/* FONTS ===================== */
-+font('ProximaNova', 'ProximaNovaBold')
++font('#{$font_name}', '#{$font_name}Bold')
     font-style: normal
     font-weight: 700
 
-+font('ProximaNova', 'ProximaNovaExtrabold')
++font('#{$font_name}', '#{$font_name}Extrabold')
     font-style: normal
     font-weight: 900
 
-+font('ProximaNova', 'ProximaNovaReg')
++font('#{$font_name}', '#{$font_name}Reg')
     font-style: normal
     font-weight: 400
-/* FONTS END ===================== */
 
-html, body
-    height: 100%
+a        
+    +tr(all 0.3s linear)
+    text-decoration: none
+    color: $color_link
+    outline: none
+    background: $color_link_bg
+    &:visited
+        color: $color_visit
+    &:hover
+        color: $color_hover
+    &:active
+        color: $color_active
 
 body
-    margin: 0px
-    padding: 0px
-    font-family: 'ProximaNova', Arial, Tahoma, sans-serif
-    background-color: $color_bg
+    font-family: '#{$font_name}', Arial, Tahoma, sans-serif
+    +bg
     position: relative
-    font-size: 16px 
-    font-weight: 400
+    font-size: $font_size 
+    font-weight: $font-weight
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
-
-input, textarea
-    color: #333
-    outline: none
-    +br(0)
-    -webkit-appearance: none
 
 button
     cursor: pointer
@@ -57,28 +64,16 @@ input
     &[type="button"], &[type="submit"]
         @extend button
 
-
-td, form
-    margin: 0px
-    padding: 0px
-
-a
-    color: #000
-    +tr(all 0.2s linear)
-    text-decoration: none
+input, textarea
+    color: $color_input_text
     outline: none
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    +br(0)
+    -webkit-appearance: none
 
 *
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    box-sizing: border-box
+    +box-sizing(border-box)
     &:before, &:after
-        -webkit-box-sizing: border-box
-        -moz-box-sizing: border-box
-        box-sizing: border-box
-
+        +box-sizing(border-box)
 
 /* 1.GRID =============*/
 $width: 100%
@@ -93,15 +88,15 @@ $columns: 12
     .my-row     
         margin-left: $gutter
         margin-right: $gutter
-        +clr
-        &>[class*="col-"]
-            position: relative
-            min-height: 1px
-            float: left
+//         +clr
+//         &>[class*="col-"]
+//             position: relative
+//             min-height: 1px
+//             float: left
 
-@for $i from 1 through $columns
-    .col-#{$i}
-        width: (($width / $columns) * $i)
+// @for $i from 1 through $columns
+//     .col-#{$i}
+//         width: (($width / $columns) * $i)
 /* 1.GRID END =============*/   
 
 /* 1. MAIN ================== */
@@ -112,69 +107,40 @@ $columns: 12
 
 .wrapper
     position: relative
-    max-width: 1212px
+    max-width: 1200px
     min-width: 320px
     padding: 0 15px
     margin-right: auto 
     margin-left: auto
-    +clr
+    // +clr
 
 h1 
     padding: 10px 0 15px
-    color: #017f5a
+    color: $color_text
     text-transform: uppercase
     font-size: 129px
     line-height: 104px
-    font-weight: 900
-    
+    font-weight: 900    
     .text-sm
         font-size: 82px
         line-height: 95px
     small
         font-size: 124px
         line-height: 99px
+
 h3 
     padding: 15px 0
-    color: #434551
+    color: $color_text
     font-size: 33px
     font-weight: 700
     line-height: 35px
-
-blockquote
-    position: relative
-    padding: 25px 40px
-    margin-bottom: 35px
-    color: #434551
-    font-size: 25px
-    font-weight: 700
-    line-height: 31px
-    &:before 
-        content: '['
-        display: block
-        position: absolute
-        left: 0
-        top: 0
-        color: #1a9a74
-        font-size: 125px
-        font-weight: 300
-        line-height: 95px
 
 .text-left
     text-align: left !important
 
 .text-right
     text-align: right !important
-
-.text-success
-    color: #017f5a
-
-.link-br 
-    display: inline-block
-    line-height: 25px
-    border-bottom: 2px solid #017f5a
-    &:hover 
-        border-bottom-color: transparent
-/* 1. MAIN END ================== */ 
+/* MAIN END ================== */ 
 
 /* ICONS ================== */
 .ic 
@@ -193,31 +159,26 @@ blockquote
     display: inline-block
     vertical-align: middle
     text-align: center
-    padding: 9px 12px 0
+    padding: 10px 20px 0
     height: 40px
-    color: #434551 
-    font: 700 17px/17px  "Proxima Nova", Arial, sans-serif
-    +tr(all 0.2s linear)
-    background-color: transparent
-    +border-radius(8px)
-    border: 3px solid #a3a3a3
-    &:hover 
-        border-color: #017f5a
+    color: $color_btn_txt
+    font: normal 16px/16px  "#{$font_name}", Arial, sans-serif
+    +tr(all 0.3s linear)
+    background-color: $color_btn_bg
+    border: none
 
 input[type="submit"].btn, button.btn
     padding-top: 0
 /* BUTTON END ================== */
 
 /* FORM ================== */
-input[type="text"],
-input[type="password"],
-input[type="tel"],
-input[type="email"],
+input[type="text"], input[type="password"],
+input[type="tel"], input[type="email"],
 textarea
     height: 40px
     padding: 0 15px
     font: normal 14px/14px Arial, sans-serif
-    color: #000
+    color: $color_text
     background: $color_input_bg
     border: 1px solid #ccc
     &.form-control
@@ -242,132 +203,80 @@ label
     top: 0
     width: 100%
     &__top
-        padding: 35px 0 20px
-        +df 
-        +jc
+        // padding: 35px 0 20px
+        // +df 
+        // +jc
     &__bottom
         border-bottom: 1px solid #dedede
-    .list-lang
-        padding-top: 9px
-    .address
-        width: 240px
 
-.address
-    color: #636363
-    font-size: 13px
-    font-style: normal
-    line-height: 15px
-
-.circle
-    display: inline-block
-    vertical-align: top
-    color: #262729
-    font-size: 12px
-    font-weight: 600
-    line-height: 17px
-    & + .circle
-        margin-left: 8px
-    &:before 
-        content: ''
-        display: inline-block
-        vertical-align: middle
-        width: 8px
-        height: 8px
-        margin-right: 2px
-        background-color: #2d71cf
-        +border-radius(50%)
-    &:nth-child(2):before
-        background-color: #7218b2
+// .circle
+//     display: inline-block
+//     vertical-align: top
+//     color: #262729
+//     font-size: 12px
+//     font-weight: 600
+//     line-height: 17px
+//     & + .circle
+//         margin-left: 8px
+//     &:before 
+//         content: ''
+//         display: inline-block
+//         vertical-align: middle
+//         width: 8px
+//         height: 8px
+//         margin-right: 2px
+//         background-color: #2d71cf
+//         +border-radius(50%)
+//     &:nth-child(2):before
+//         background-color: #7218b2
 
 .list-lang 
     list-style: none
     &__item 
         display: inline-block
         vertical-align: top
-        margin-right: -4px
-        &.active .list-lang__link 
-            color: $g-color
-            background-color: #ededed
         & + .list-lang__item 
             margin-left: 10px
     &__link 
         display: block
-        height: 32px
-        width: 32px
-        padding-top: 10px
-        font-size: 14px
-        font-weight: 700
-        text-transform: uppercase
         text-align: center
-        color: #c3c3c3
-        +border-radius(50%)
-        &:hover 
-            color: $g-color
         
-.file   
-    display: block
-    width: 170px
-    height: 41px
-    padding: 5px 11px
-    background-color: #ffffff
-    +box-shadow(0 0 10px rgba(0, 0, 0, 0.08))
-    +border-radius(3px)
-    border: 1px solid #eee
-    &__type 
-        position: relative
-        z-index: 1
-        display: inline-block
-        vertical-align: middle
-        margin-right: -4px
-        width: 60px
-        color: #1b9c76
-        font-size: 32px
-        line-height: 32px
-        font-weight: 900
-        text-transform: uppercase
-    &__name 
-        display: inline-block
-        vertical-align: middle
-        margin-right: -4px
-        width: 100%
-        margin-left: -60px
-        padding-left: 70px
-        color: rgba(38,39,41,0.57)
-        font-size: 11px
-        font-weight: 400
-        line-height: 14px
-        text-transform: uppercase
-
-.phone 
-    padding-top: 8px
-    padding-right: 53px
-    text-align: right
-    background: url("../img/telephone.png") no-repeat right top
-    &__text 
-        text-transform: uppercase
-        color: #262729
-        font-size: 16px
-        line-height: 16px
-        font-weight: 400
-        strong
-            display: inline-block
-            vertical-align: middle
-            margin-left: 4px
-            color: $g-color
-            font-size: 32px
-            line-height: 30px
-            font-weight: 700
-    &__link 
-        display: inline-block
-        color: #262729
-        font-size: 12px
-        border-bottom: 1px solid #c9c9c9
-        &:hover 
-            border-color: transparent
+// .file   
+//     display: block
+//     width: 170px
+//     height: 41px
+//     padding: 5px 11px
+//     background-color: #ffffff
+//     +box-shadow(0 0 10px rgba(0, 0, 0, 0.08))
+//     +border-radius(3px)
+//     border: 1px solid #eee
+//     &__type 
+//         position: relative
+//         z-index: 1
+//         display: inline-block
+//         vertical-align: middle
+//         margin-right: -4px
+//         width: 60px
+//         color: $color_text
+//         font-size: 32px
+//         line-height: 32px
+//         font-weight: 900
+//         text-transform: uppercase
+//     &__name 
+//         display: inline-block
+//         vertical-align: middle
+//         margin-right: -4px
+//         width: 100%
+//         margin-left: -60px
+//         padding-left: 70px
+//         color: rgba(38,39,41,0.57)
+//         font-size: 11px
+//         font-weight: 400
+//         line-height: 14px
+//         text-transform: uppercase
 
 .navbar     
     padding: 13px 0
-    background: $g-color
     &.fixed 
         position: fixed
         left: 0
@@ -376,8 +285,8 @@ label
         +tr(all 0.5s linear)
     &-menu 
         list-style: none
-        +df
-        +jc
+        // +df
+        // +jc
         &__item
             display: inline-block
             position: relative
@@ -397,11 +306,9 @@ label
                 width: 1px
                 height: 28px
                 background: rgba(255,255,255,0.15)
-
             &:first-child, &--advice
                 &:before 
                     display: none
-
         &__link 
             color: #ffffff
             font-size: 25px
@@ -412,8 +319,8 @@ label
 
 .panel 
     padding: 15px 0
-    +df 
-    +jc
+    // +df 
+    // +jc
     -webkit-flex-wrap: wrap
     flex-wrap: wrap
     &__text 
@@ -429,13 +336,13 @@ label
             border-bottom-color: transparent
 
 .social 
-    +df
+    // +df
     &-list 
         list-style: none
-        +df
+        // +df
         &__link 
-            +df 
-            +align-items
+            // +df 
+            // +align-items
             width: 33px
             height: 33px
             margin: 0 1px
@@ -469,7 +376,8 @@ label
 /* CONTENT ================== */
 .content
     width: 100%
-    
+ 
+// Центрирование при прокрутке секций страницы:   
 .section:not(.home)
     padding-top: 55px !important
 /* CONTENT END ================== */

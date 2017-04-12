@@ -1,6 +1,5 @@
-//Прижать футер к низу, а хэдер к верху
-
-$(function(){
+//Прижимаем футер к низу, а хэдер к верху
+; $(function(){
 
 var hf = function(){
 	var h_header = $('header').height();
